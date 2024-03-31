@@ -1,0 +1,38 @@
+{
+    "provider": {
+        "organizationName": "Jason's Talk Sessions",
+        "npi": "1902335623",
+        "serviceProviderNumber": "Jason Michael Duncan",
+        "providerCode": "AD", // TBC
+        "referenceIdentification": "54321g" // TBC
+    },
+    "subscriber": {
+        "memberId": "0000000000",
+        "firstName": "Robert",
+        "lastName": "Avery",
+        "gender": "M",
+        "dateOfBirth": "19901207",
+        "ssn": "000000000",
+        "idCard": "card123" // subscriber’s insurance plan card number
+    },
+    "dependents": [
+        {
+            "firstName": "janeOne",
+            "lastName": "doeOne",
+            "gender": "F",
+            "dateOfBirth": "18160421",
+            "groupNumber": "0000000000"
+        }
+    ],
+    "encounter": {
+        "beginningDateOfService": "20100101",
+        "endDateOfService": "20100102",
+        "productOrServiceIDQualifier": "CJ",
+        "procedureCode": "90834",
+        "serviceTypeCodes": [
+            "98"
+        ]
+    },
+    "controlNumber": "123456789",
+    "tradingPartnerServiceId": "UHC"
+}
