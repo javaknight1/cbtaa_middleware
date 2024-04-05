@@ -3,7 +3,7 @@ import http from 'http';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import routes from './routes';
+import v1routes from './v1/routes';
 import compression from 'compression';
 
 const app = express();
@@ -13,7 +13,7 @@ app.use(cors());
 app.use(compression());
 app.use(bodyParser.json());
 
-app.use('/api', routes());
+app.use('/api/v1', v1routes());
 
 const server = http.createServer(app);
 server.listen(8080, () => {
