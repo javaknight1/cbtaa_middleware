@@ -9,7 +9,7 @@ export const findEligibility = async (req: express.Request, res: express.Respons
             AccountKey: '18644_aXHu*NOki#SIrJMqhYMFG1Zf',
             ins_name_l: 'Avery',
             ins_name_f: 'Robert',
-            payerid: 'SB690',
+            payerid: '10096',
             pat_rel: '18',
             fdos: '20240522',
             prov_npi: '1902335623',
