@@ -2,10 +2,10 @@ import express from 'express';
 
 const router = express.Router();
 
-import change from './change_healthcare';
+import eligibility from './eligibility';
 
 export default (): express.Router => {
-    change(router);
+    eligibility(router);
     
     return router;
 }
