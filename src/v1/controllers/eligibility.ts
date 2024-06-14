@@ -4,38 +4,53 @@ import axios from 'axios';
 import { errResponse } from '../helpers';
 
 export const findEligibility = async (req: express.Request, res: express.Response) => {
-    try {
-        const formData = {
-            AccountKey: '18644_aXHu*NOki#SIrJMqhYMFG1Zf',
-            ins_name_l: 'Avery',
-            ins_name_f: 'Robert',
-            payerid: '10096',
-            pat_rel: '18',
-            fdos: '20240522',
-            prov_npi: '1902335623',
-            service_code: '98',
-            ins_number: '603298306',
-            ins_dob: '19901207',
-            ins_sex: 'M',
-            prov_name_l: 'Cognitive Behavior Therapy and Assessment Associates'
-        };
-        
-        const resp = await fetch(
-            `https://svc.claim.md/services/eligdata/`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Accept': 'application/json'
-                },
-                body: new URLSearchParams(formData).toString()
+    const options = {
+        method: 'POST',
+        url: 'https://portal.instantvob.com/api/instant-vob',
+        headers: {
+            accept: 'application/json',
+            'x-api-key': req.body.key,
+            'content-type': 'application/json'
+        },
+        data: {
+            // specialtyId: null,
+            includePDF: false,
+            memberId: req.body.member,
+            firstName: req.body.first,
+            lastName: req.body.last,
+            dateOfBirth: req.body.dob,
+            vendor: req.body.vendor
+        }
+    };
+
+    axios.request(options)
+        .then(function (response) {
+            console.log(response.data);
+            const result = {
+                "status": "success",
+                "result": {
+                    "type": response.data.vob.plan.type,
+                    "oon": false,
+                    "dates": {
+                        "start": response.data.vob.plan.planDateBegin,
+                        "end": response.data.vob.plan.planDateEnd
+                    },
+                    "individual": {},
+                    "family": {}
+                }
+            };
+            for (var i = 0; i < response.data.vob.coverages.length; i++) {
+                const coverage = response.data.vob.coverages[i];
+                if (coverage.name == "Mental Health Provider  - Outpatient") {
+                    result["result"]["oon"] = result["result"]["oon"] || coverage.inNetwork;
+                    result["result"]["individual"] = coverage.individual;
+                    result["result"]["family"] = coverage.family;
+                }
             }
-        );
-        
-        const data = await resp.text();
-        console.log(data);
-    } catch (error) {
-        console.log(error);
-        return errResponse(res, 400, "CODE_ERROR", "Found message in code.");
-    }
+            res.status(200).json(result).end();
+        })
+        .catch(function (error) {
+            console.error(error.response);
+            errResponse(res, error.response.status, error.response.statusText, error.response.data.warnings);
+        });
 }
