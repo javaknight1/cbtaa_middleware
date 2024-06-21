@@ -65,7 +65,6 @@ export const findEligibility = async (req: express.Request, res: express.Respons
             var coverages: any = [];
             for (var i = 0; i < response.data.vob.coverages.length; i++) {
                 const coverage = response.data.vob.coverages[i];
-                console.log(coverage.name);
                 if (coverage.name == GENERAL_COVERAGE && !coverage.inNetwork) {
                     // Individual
                     result['result']['oon_individual_deductible'] = coverage.individual.deductible.value;
@@ -82,8 +81,6 @@ export const findEligibility = async (req: express.Request, res: express.Respons
                     result['result']['oon_family_out_of_pocket_max'] = coverage.family.outOfPocket.value;
                     result['result']['oon_family_out_of_pocket_spent'] = coverage.family.outOfPocketMet.value;
                     result['result']['oon_family_out_of_pocket_remaining'] = coverage.family.outOfPocketRemaining.value;
-
-                    console.log(result);
                 }
 
                 for (var j = 0; j < qualifiers.length; j++) {
@@ -93,7 +90,6 @@ export const findEligibility = async (req: express.Request, res: express.Respons
                     } 
                 }
             }
-            console.log(result);
             res.status(200).json(result).end();
         })
         .catch(function (error) {
