@@ -131,6 +131,20 @@ export const findEligibility = async (req: express.Request, res: express.Respons
             console.log("General: " + coinsurances_general);
             console.log("Mental: " + coinsurances_mental);
             console.log("Other: " + coinsurances_other);
+
+            // // Calulate estimate
+            // if (coinsurances_mental.length > 1) {
+            //     for (var i=0; i < coinsurances_mental.length; i++) {
+            //         const coverage = coinsurances_mental[i];
+            //         for (var j=0; j < coverage['coInsurance'].length; j++) {
+
+            //         }
+            //     }
+            // } else if (coinsurances_general) {
+
+            // } else if (coinsurances_other.length > 0) {
+
+            // }
             
             res.status(200).json({
                 "status": "success",
