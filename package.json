@@ -1,10 +1,11 @@
 {
-  "name": "cbtaaa_middleware",
+  "name": "cbtaa_middleware",
   "version": "1.0.0",
   "description": "Middleware for CBTAA to determine what client's insurnace can provide",
-  "main": "app.js",
+  "main": "dist/app.js",
   "scripts": {
-    "start": "node src",
+    "start": "node dist/app.js",
+    "build": "tsc",
     "dev": "nodemon src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
