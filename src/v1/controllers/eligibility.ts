@@ -10,7 +10,7 @@ const GENERAL_COVERAGE: string = "Health Benefit Plan Coverage";
 export const findEligibility = async (req: express.Request, res: express.Response) => {
 
     var missing: string[] = []
-    console.log("req.body: " + req.body);
+    console.log("req.body: " + JSON.stringify(req.body, null, 4));
     if (!req.body.key) {
         missing.push("key");
     }
