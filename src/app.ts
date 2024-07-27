@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import v1routes from './v1/routes';
 import compression from 'compression';
 
+const port = process.env.PORT || 3000
 const app = express();
 dotenv.config();
 
@@ -16,6 +17,6 @@ app.use(bodyParser.json());
 app.use('/api/v1', v1routes());
 
 const server = http.createServer(app);
-server.listen(80, () => {
-    console.log("Running server on https://localhost:80/")
+server.listen(port, () => {
+    console.log(`Running server on https://localhost:${port}/`)
 });
