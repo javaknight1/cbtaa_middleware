@@ -18,5 +18,5 @@ app.use('/api/v1', v1routes());
 
 const server = http.createServer(app);
 server.listen(port, () => {
-    console.log(`Running server on https://localhost:${port}/`)
+    console.log(`Running server on https://localhost:${port}/`);
 });
