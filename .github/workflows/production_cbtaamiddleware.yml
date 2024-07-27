@@ -5,11 +5,28 @@ name: Build and deploy Node.js app to Azure Web App - cbtaamiddleware
 
 on:
   push:
-    branches:
-      - production
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
   workflow_dispatch:
 
 jobs:
+  merge_master_to_production:
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0 # Ensure all tags are fetched
+    
+        - name: Merge master into production
+          run: |
+            git checkout production
+            git merge origin/master
+            git push origin production
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   build:
     runs-on: ubuntu-latest
 
