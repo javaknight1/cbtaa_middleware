@@ -16,6 +16,6 @@ app.use(bodyParser.json());
 app.use('/api/v1', v1routes());
 
 const server = http.createServer(app);
-server.listen(8080, () => {
-    console.log("Running server on https://localhost:8080/")
+server.listen(80, () => {
+    console.log("Running server on https://localhost:80/")
 });
